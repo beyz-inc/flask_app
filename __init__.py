@@ -1,28 +1,50 @@
-from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
-from flask_migrate import Migrate
+from flask import Flask, request
+import psycopg2
 
-db = SQLAlchemy()
+app = Flask(__name__)
+
+conn = psycopg2.connect(
+        host="localhost",
+        database="deneme",
+        user="beyza",
+        password="labris")
 
 
-def create_app():
-    app = Flask(__name__)
+@app.route('/', methods=['GET'])
+def hello_world():
+    return 'Hello, World!'
 
-    app.config['SECRET_KEY'] = 'secret-key-goes-here'
-    # Configure SQLAlchemy
-    app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://beyza:labris@localhost/flask_db'
-    app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-    migrate = Migrate(app, db)
-    db.init_app(app)
-    migrate.init_app(app, db)
+@app.route('/create', methods=['GET', 'POST'])
+def create():
+    # Get the username and email from the request body
+    username = request.form.get('username')
+    email = request.form.get('email')
 
-    # blueprint for auth routes in our app
-    from .auth import auth as auth_blueprint
-    app.register_blueprint(auth_blueprint)
+    # Insert the data into the database
+    cur = conn.cursor()
+    cur.execute(
+        "CREATE TABLE IF NOT EXIST users (id SERIAL PRIMARY KEY, username VARCHAR(255), email VARCHAR(255));"
+    )
+    cur.execute(
+        "INSERT INTO users (username, email) VALUES (%s, %s)", (username, email))
+    conn.commit()
 
-    # blueprint for non-auth parts of app
-    from .main import main as main_blueprint
-    app.register_blueprint(main_blueprint)
+    cur.close()
+    conn.close()
+    return 'User created successfully!'
 
-    return app
+
+if __name__ == '__main__':
+    app.run(debug=True)
+
+# # Open a cursor to perform database operations
+# cur = conn.cursor()
+#
+# # Execute a command: this creates a new table
+# cur.execute('DROP TABLE IF EXISTS users;')
+#
+# conn.commit()
+#
+# cur.close()
+# conn.close()

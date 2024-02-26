@@ -1,44 +1,118 @@
 {% extends "user_base.html" %}
-
-{% block title %}Create User{% endblock %}
-
+{% block title %}Create User Page{% endblock %}
 {% block content %}
 <h1>Create User</h1>
-<form method="post">
-	<p>
-        <label for="username">Username:</label>
-        <input type="text" name="username">
-    </p>
-    <p>
-        <label for="firstname">First Name:</label>
-        <input type="text" name="firstname">
-    </p>
-    <p>
-        <label for="middlename">Middle Name:</label>
-        <input type="text" name="middlename">
-    </p>
-    <p>
-        <label for="lastname">Last Name:</label>
-        <input type="text" name="lastname">
-    </p>
-    <p>
-        <label for="birthdate">Birthdate:</label>
-        <input type="date" name="birthdate">
-    </p>
-    <p>
-        <label for="email">Email:</label>
-        <input type="email" name="email">
-    </p>
-    <p>
-        <label for="password">Password:</label>
-        <input type="password" name="password1">
-    </p>
-    <p>
-        <label for="password">Password:</label>
-        <input type="password" name="password2">
-    </p>
-    <p>
-        <button type="submit">Create User</button>
-    </p>
+<form action="#" method="post">
+	<p>Username:</p>
+	<p><input type="text" name="username" /></p>
+	<p><input type="submit" value="submit"/></p>
+</form>
+<form action="#" method="post">
+	<p><input type="email" name="email" placeholder="Enter Email" value="{{email if email}}" /></p>
+	<p><input type="submit" value="submit"/></p>
 </form>
 {% endblock %}
+
+
+<!--{% block content %}-->
+<!--<h1>Create User</h1>-->
+<!--<form action="#" method="post">-->
+<!--	<p>Username:</p>-->
+<!--	<p><input type="text" name="username" /></p>-->
+<!--	<p><input type="submit" value="submit"/></p>-->
+<!--</form>-->
+<!--<form action="#" method="post">-->
+<!--	<p><input type="email" name="email" placeholder="Enter Email" value="{{email if email}}" /></p>-->
+<!--	<p><input type="submit" value="submit"/></p>-->
+<!--</form>-->
+<!--{% endblock %}-->
+
+
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <meta http-equiv="X-UA-Compatible" content="IE=edge">-->
+<!--    <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+<!--    <title>Create User</title>-->
+<!--</head>-->
+<!--<body>-->
+
+<!--<h1>Create User</h1>-->
+
+<!--<form id="createUserForm">-->
+<!--    <label for="username">Username:</label>-->
+<!--    <input type="text" id="username" name="username" required>-->
+<!--    <br>-->
+
+<!--    <label for="firstname">First Name:</label>-->
+<!--    <input type="text" id="firstname" name="firstname" required>-->
+<!--    <br>-->
+
+<!--    <label for="middlename">Middle Name:</label>-->
+<!--    <input type="text" id="middlename" name="middlename">-->
+<!--    <br>-->
+
+<!--    <label for="lastname">Last Name:</label>-->
+<!--    <input type="text" id="lastname" name="lastname" required>-->
+<!--    <br>-->
+
+<!--    <label for="birthdate">Birthdate:</label>-->
+<!--    <input type="date" id="birthdate" name="birthdate" required>-->
+<!--    <br>-->
+
+<!--    <label for="email">Email:</label>-->
+<!--    <input type="email" id="email" name="email" required>-->
+<!--    <br>-->
+
+<!--    <label for="password">Password:</label>-->
+<!--    <input type="password" id="password" name="password" required>-->
+<!--    <br>-->
+
+<!--    <button type="button" onclick="createUser()">Create User</button>-->
+<!--</form>-->
+
+<!--<script>-->
+<!--    function createUser() {-->
+<!--        // Get form data-->
+<!--        var username = document.getElementById("username").value;-->
+<!--        var firstname = document.getElementById("firstname").value;-->
+<!--        var middlename = document.getElementById("middlename").value;-->
+<!--        var lastname = document.getElementById("lastname").value;-->
+<!--        var birthdate = document.getElementById("birthdate").value;-->
+<!--        var email = document.getElementById("email").value;-->
+<!--        var password = document.getElementById("password").value;-->
+
+<!--        // Create data object-->
+<!--        var data = {-->
+<!--            "username": username,-->
+<!--            "firstname": firstname,-->
+<!--            "middlename": middlename,-->
+<!--            "lastname": lastname,-->
+<!--            "birthdate": birthdate,-->
+<!--            "email": email,-->
+<!--            "password": password-->
+<!--        };-->
+
+<!--        // Make a POST request to the Flask-RESTful API-->
+<!--        fetch('/user/create', {-->
+<!--            method: 'POST',-->
+<!--            headers: {-->
+<!--                'Content-Type': 'application/json',-->
+<!--            },-->
+<!--            body: JSON.stringify(data),-->
+<!--        })-->
+<!--        .then(response => response.json())-->
+<!--        .then(data => {-->
+<!--            console.log('Success:', data);-->
+<!--            alert('User created successfully!');-->
+<!--        })-->
+<!--        .catch((error) => {-->
+<!--            console.error('Error:', error);-->
+<!--            alert('Error creating user. Please try again.');-->
+<!--        });-->
+<!--    }-->
+<!--</script>-->
+
+<!--</body>-->
+<!--</html>-->
